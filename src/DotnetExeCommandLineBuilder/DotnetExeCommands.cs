@@ -11,10 +11,14 @@ namespace DotnetExeCommandLineBuilder;
 public static class DotnetExeCommands
 {
   public static DotnetBuildCommandLineBuilder Build(object projectOrSolution) => new(projectOrSolution);
+  public static DotnetBuildCommandLineBuilder Build() => new();
   public static DotnetCleanCommandLineBuilder Clean(object projectOrSolution) => new(projectOrSolution);
+  public static DotnetCleanCommandLineBuilder Clean() => new();
   public static DotnetPackCommandLineBuilder Pack(object projectOrSolution) => new(projectOrSolution);
+  public static DotnetPackCommandLineBuilder Pack() => new();
   public static DotnetPublishCommandLineBuilder Publish(object projectOrSolution) => new(projectOrSolution);
   public static DotnetRunCommandLineBuilder Run() => new();
   public static DotnetTestCommandLineBuilder Test(object projectOrSolutionOrDll) => new(projectOrSolutionOrDll);
+  public static DotnetTestCommandLineBuilder Test() => new();
   public static DotnetToolCommandLineBuilder Tool() => new();
 }

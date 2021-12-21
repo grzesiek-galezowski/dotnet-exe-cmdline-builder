@@ -9,6 +9,11 @@ public record DotnetCleanCommandLineBuilder : CommandLineBuilder<DotnetCleanComm
     CmdLine = Format.ObjectArg("clean", projectOrSolution);
   }
 
+  public DotnetCleanCommandLineBuilder()
+  {
+    CmdLine = "clean";
+  }
+
   public override string ToString() => CmdLine;
   public DotnetCleanCommandLineBuilder Output(object value) => WithObjectArg("--output", value);
   public DotnetCleanCommandLineBuilder Configuration(string value) => WithArg("--configuration", value);

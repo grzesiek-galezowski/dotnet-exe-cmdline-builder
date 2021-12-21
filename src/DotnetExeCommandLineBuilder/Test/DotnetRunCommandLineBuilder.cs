@@ -6,7 +6,12 @@ public record DotnetTestCommandLineBuilder : CommandLineBuilder<DotnetTestComman
 {
   public DotnetTestCommandLineBuilder(object projectOrSolutionOrDll)
   {
-    CmdLine = $"test {Escaped(projectOrSolutionOrDll)}";
+    CmdLine = Format.ObjectArg("test", projectOrSolutionOrDll);
+  }
+
+  public DotnetTestCommandLineBuilder()
+  {
+    CmdLine = "test";
   }
 
   public override string ToString() => CmdLine;

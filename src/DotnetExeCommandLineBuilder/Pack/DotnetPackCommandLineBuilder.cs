@@ -4,9 +4,14 @@ namespace DotnetExeCommandLineBuilder.Pack;
 
 public record DotnetPackCommandLineBuilder : CommandLineBuilder<DotnetPackCommandLineBuilder>
 {
-  public DotnetPackCommandLineBuilder(object projectOrSolution)
+  internal DotnetPackCommandLineBuilder(object projectOrSolution)
   {
-    CmdLine = Format.ObjectArg("build", projectOrSolution);
+    CmdLine = Format.ObjectArg("pack", projectOrSolution);
+  }
+
+  internal DotnetPackCommandLineBuilder()
+  {
+    CmdLine = "pack";
   }
 
   public override string ToString() => CmdLine;

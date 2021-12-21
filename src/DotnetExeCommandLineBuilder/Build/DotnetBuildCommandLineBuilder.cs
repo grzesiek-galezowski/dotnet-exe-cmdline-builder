@@ -9,6 +9,11 @@ public record DotnetBuildCommandLineBuilder : CommandLineBuilder<DotnetBuildComm
     CmdLine = Format.ObjectArg("build", projectOrSolution);
   }
 
+  public DotnetBuildCommandLineBuilder()
+  {
+    CmdLine = "build";
+  }
+
   public override string ToString() => CmdLine;
 
   public DotnetBuildCommandLineBuilder Architecture(string value) => WithArg("--arch", value);

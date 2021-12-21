@@ -8,5 +8,15 @@
     <Nullable>enable</Nullable>
     <DebugType>portable</DebugType>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Grzegorz Galezowski</Authors>
+    <Company>Grzegorz Galezowski</Company>
+    <Product>DotnetExeCommandLineBuilder</Product>
+    <Description>Ultra light commandline builder for .net exe, for use with C# scripts and useful when combined with SimpleExec</Description>
+    <PackageProjectUrl>https://github.com/grzesiek-galezowski/dotnet-exe-cmdline-builder</PackageProjectUrl>
+    <Copyright>Grzegorz Galezowski 2021</Copyright>
+    <RepositoryUrl>https://github.com/grzesiek-galezowski/dotnet-exe-cmdline-builder</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>dotnet_exe,build,script</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 </Project>
