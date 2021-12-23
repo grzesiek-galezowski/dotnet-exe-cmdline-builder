@@ -9,7 +9,7 @@ internal static class Format
 
   public static string ObjectArg(string argName, object argValue)
   {
-    return $"{argName} {Format.Escaped(argValue)}";
+    return $"{argName} {Escaped(argValue)}";
   }
 
   public static string Arg(string argName, string argValue)

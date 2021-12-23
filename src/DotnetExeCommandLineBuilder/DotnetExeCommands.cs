@@ -1,5 +1,6 @@
 ﻿using DotnetExeCommandLineBuilder.Build;
 using DotnetExeCommandLineBuilder.Clean;
+using DotnetExeCommandLineBuilder.NuGet.Push;
 using DotnetExeCommandLineBuilder.Pack;
 using DotnetExeCommandLineBuilder.Publish;
 using DotnetExeCommandLineBuilder.Run;
@@ -21,4 +22,6 @@ public static class DotnetExeCommands
   public static DotnetTestCommandLineBuilder Test(object projectOrSolutionOrDll) => new(projectOrSolutionOrDll);
   public static DotnetTestCommandLineBuilder Test() => new();
   public static DotnetToolCommandLineBuilder Tool() => new();
+
+  public static DotnetNugetPushCommandLineBuilder NugetPush(object path) => new(path);
 }

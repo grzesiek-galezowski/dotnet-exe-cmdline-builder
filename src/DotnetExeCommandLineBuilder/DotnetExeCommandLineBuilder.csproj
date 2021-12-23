@@ -19,4 +19,18 @@
     <PackageTags>dotnet_exe,build,script</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="NuGet\Sign\" />
+    <Folder Include="NuGet\Trust\" />
+    <Folder Include="NuGet\Verify\" />
+    <Folder Include="NuGet\UpdateSource\" />
+    <Folder Include="NuGet\RemoveSource\" />
+    <Folder Include="NuGet\ListSource\" />
+    <Folder Include="NuGet\EnableSource\" />
+    <Folder Include="NuGet\DisableSource\" />
+    <Folder Include="NuGet\Delete\" />
+    <Folder Include="NuGet\Locals\" />
+    <Folder Include="NuGet\AddSource\" />
+  </ItemGroup>
 </Project>

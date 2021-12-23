@@ -72,8 +72,9 @@ Target("Push", DependsOn("Clean", "Pack"), () =>
 {
     foreach (var nupkgPath in nugetPath.GetFiles("*.nupkg"))
     {
-        Run("dotnet", $"nuget push {nupkgPath}" +
-                      " --source https://api.nuget.org/v3/index.json");
+        Run("dotnet", 
+          DotnetExeCommands.NugetPush(nupkgPath)
+            .Source("https://api.nuget.org/v3/index.json").CmdLine);
     }
 });
 
