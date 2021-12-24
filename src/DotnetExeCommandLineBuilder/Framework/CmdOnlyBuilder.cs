@@ -6,4 +6,6 @@ public record CmdOnlyBuilder(string CmdLine)
   {
     return CmdLine;
   }
+  public static implicit operator string(CmdOnlyBuilder builder) => builder.CmdLine;
+
 }

@@ -7,4 +7,5 @@ public record CommandLineBuilder<T> where T : CommandLineBuilder<T>
   public T WithArg(string argName, string argValue) => (T)(this with { CmdLine = $"{CmdLine} {Format.Arg(argName, argValue)}" });
   public T WithObjectArg(string argName, object argValue) => (T)(this with { CmdLine = $"{CmdLine} {Format.ObjectArg(argName, argValue)}" });
   protected string Escaped<TContent>(TContent content) => Format.Escaped(content);
+  public static implicit operator string(CommandLineBuilder<T> builder) => builder.CmdLine;
 }

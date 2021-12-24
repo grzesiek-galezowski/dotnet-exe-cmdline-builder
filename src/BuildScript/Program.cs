@@ -2,6 +2,7 @@
 using AtmaFileSystem.IO;
 using DotnetExeCommandLineBuilder;
 using static Bullseye.Targets;
+using static DotnetExeCommandLineBuilder.DotnetExeCommands;
 using static SimpleExec.Command;
 
 var configuration = "Release";
@@ -10,12 +11,13 @@ var configuration = "Release";
 var root = AbsoluteFilePath.OfThisFile().ParentDirectory(2).Value;
 var srcDir = root.AddDirectoryName("src");
 var nugetPath = root.AddDirectoryName("nuget");
-var version="0.1.0";
+var version = "0.3.0";
 
 if (!nugetPath.Exists())
 {
   nugetPath.Create();
 }
+
 srcDir.SetAsCurrentDirectory();
 
 //////////////////////////////////////////////////////////////////////
@@ -30,7 +32,7 @@ void Pack(AbsoluteDirectoryPath outputPath, AbsoluteDirectoryPath rootSourceDir,
       .NoBuild()
       .WithArg("-p:SymbolPackageFormat=snupkg")
       .WithArg($"-p:VersionPrefix={version}")
-      .Output(outputPath).CmdLine,
+      .Output(outputPath),
     workingDirectory: rootSourceDir.AddDirectoryName(projectName).ToString());
 }
 
@@ -40,42 +42,33 @@ void Pack(AbsoluteDirectoryPath outputPath, AbsoluteDirectoryPath rootSourceDir,
 
 Target("Clean", () =>
 {
-  nugetPath.Delete(true);
-  Run($"dotnet", DotnetExeCommands.Clean().Configuration(configuration).CmdLine);
+  nugetPath.Delete(recursive: true);
+  Run($"dotnet", Clean().Configuration(configuration));
 });
 
 Target("Build", () =>
 {
-  Run("dotnet",
-    DotnetExeCommands.Build()
-      .Configuration(configuration)
-      .WithArg($"-p:VersionPrefix={version}")
-      .CmdLine);
+  Run("dotnet", Build()
+    .Configuration(configuration)
+    .WithArg($"-p:VersionPrefix={version}"));
 });
 
 Target("Test", DependsOn("Build"), () =>
 {
-  Run("dotnet",
-    DotnetExeCommands.Test()
-      .NoBuild()
-      .Configuration(configuration)
-      .WithArg($"-p:VersionPrefix={version}")
-      .CmdLine);
+  Run("dotnet", Test()
+    .NoBuild()
+    .Configuration(configuration)
+    .WithArg($"-p:VersionPrefix={version}"));
 });
 
-Target("Pack", DependsOn("Test", (string) "Build"), () =>
-{
-  Pack(nugetPath, srcDir, "DotnetExeCommandLineBuilder");
-});
+Target("Pack", DependsOn("Test", (string)"Build"), () => { Pack(nugetPath, srcDir, "DotnetExeCommandLineBuilder"); });
 
 Target("Push", DependsOn("Clean", "Pack"), () =>
 {
-    foreach (var nupkgPath in nugetPath.GetFiles("*.nupkg"))
-    {
-        Run("dotnet", 
-          DotnetExeCommands.NugetPush(nupkgPath)
-            .Source("https://api.nuget.org/v3/index.json").CmdLine);
-    }
+  foreach (var nupkgPath in nugetPath.GetFiles("*.nupkg"))
+  {
+    Run("dotnet", NugetPush(nupkgPath).Source("https://api.nuget.org/v3/index.json"));
+  }
 });
 
 Target("default", DependsOn("Pack"));
